@@ -1,0 +1,39 @@
+plugins { id 'com.android.application' }
+
+android {
+    namespace 'com.backrooms.escape'
+    compileSdk 34
+    defaultConfig {
+        applicationId 'com.backrooms.escape'
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName '1.0'
+    }
+    signingConfigs {
+        release {
+            storeFile file('release.jks')
+            storePassword 'backrooms123'
+            keyAlias 'backrooms'
+            keyPassword 'backrooms123'
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+        }
+    }
+    androidResources {
+        // keep big media files uncompressed (predictable ~50 MB APK, faster loading)
+        noCompress 'wav', 'png', 'json'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation 'androidx.webkit:webkit:1.11.0'
+}
